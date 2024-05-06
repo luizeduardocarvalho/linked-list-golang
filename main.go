@@ -142,6 +142,41 @@ func (list *List[T]) update(value T, position int64) {
 	current.value = value
 }
 
+func (list List[T]) isEmpty() bool {
+	if list.head == nil {
+		return true
+	}
+
+	return false
+}
+
+func (list List[T]) length() int64 {
+	length := int64(0)
+
+	current := list.head
+
+	if current != nil {
+		length++
+	} else {
+		return length
+	}
+
+	if current.nextValue == nil {
+		return length
+	}
+
+	for {
+		if current.nextValue == nil {
+			break
+		}
+
+		current = current.nextValue
+		length++
+	}
+
+	return length
+}
+
 func (list List[T]) print() {
 	if list.head != nil {
 		value := list.head
@@ -169,5 +204,11 @@ func main() {
 
 	// value := list.search(3)
 	// fmt.Println(value)
+
+	// fmt.Println(list.isEmpty())
+
+	// length := list.length()
+	// fmt.Println(length)
+
 	list.print()
 }

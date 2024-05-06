@@ -19,8 +19,8 @@ Updating:
 - [x] Update the value of a specific node.
       
 Size related:
-- [ ] Get the size (length) of the list.
-- [ ] Check if the list is empty.
+- [x] Get the size (length) of the list.
+- [x] Check if the list is empty.
       
 Concatenation:
 - [ ] Combine two lists into one.
