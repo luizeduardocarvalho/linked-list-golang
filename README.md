@@ -23,4 +23,4 @@ Size related:
 - [x] Check if the list is empty.
       
 Concatenation:
-- [ ] Combine two lists into one.
+- [x] Combine two lists into one.

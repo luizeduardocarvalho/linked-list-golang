@@ -177,6 +177,26 @@ func (list List[T]) length() int64 {
 	return length
 }
 
+func (list *List[T]) join(listToJoin *List[T]) *List[T] {
+	if list.head == nil {
+		list.head = listToJoin.head
+		return list
+	}
+
+	current := list.head
+
+	for {
+		if current.nextValue == nil {
+			break
+		}
+
+		current = current.nextValue
+	}
+
+	current.nextValue = listToJoin.head
+	return list
+}
+
 func (list List[T]) print() {
 	if list.head != nil {
 		value := list.head
@@ -196,7 +216,14 @@ func main() {
 	list.add(1)
 	list.add(2)
 
-	list.addInPosition(3, 1)
+	// var secondList List[int]
+
+	// secondList.add(3)
+	// secondList.add(4)
+
+	// thirdList := list.join(&secondList)
+
+	// thirdList.print()
 
 	// list.update(5, 2)
 
