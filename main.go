@@ -62,6 +62,25 @@ func (list List[T]) print() {
 	}
 }
 
+func (list *List[T]) pop() {
+	if list.head != nil {
+		current := list.head
+
+		if current.nextValue == nil {
+			list.head = nil
+		}
+
+		for current.nextValue != nil {
+			if current.nextValue.nextValue == nil {
+				current.nextValue = nil
+				break
+			}
+
+			current = current.nextValue
+		}
+	}
+}
+
 func main() {
 	var list List[int]
 
@@ -69,6 +88,8 @@ func main() {
 	list.add(2)
 
 	list.addInPosition(3, 1)
+
+	list.pop()
 
 	list.print()
 }
