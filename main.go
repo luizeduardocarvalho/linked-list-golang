@@ -49,15 +49,36 @@ func (list *List[T]) addInPosition(value T, position int64) {
 	}
 }
 
-func (list List[T]) print() {
+func (list *List[T]) removeInPosition(position int64) {
 	if list.head != nil {
-		value := list.head
+		current := list.head
 
-		fmt.Println(value.value)
+		if current.nextValue == nil {
+			list.head = nil
+			return
+		}
 
-		for value.nextValue != nil {
-			fmt.Println(value.nextValue.value)
-			value = value.nextValue
+		next := current.nextValue
+
+		for i := int64(0); i < position-1; i++ {
+			if next.nextValue == nil {
+				break
+			}
+
+			current = next
+			next = current.nextValue
+		}
+
+		if position == 0 {
+			list.head = current.nextValue
+			return
+		}
+
+		if next.nextValue == nil {
+			current.nextValue = nil
+		} else {
+			current.nextValue = next.nextValue
+			next.nextValue = nil
 		}
 	}
 }
@@ -81,6 +102,45 @@ func (list *List[T]) pop() {
 	}
 }
 
+func (list *List[T]) search(position int64) T {
+	current := list.head
+
+	if list.head == nil {
+		panic("Index out of bounds")
+	}
+
+	if position == 0 {
+		return list.head.value
+	}
+
+	if current.nextValue == nil {
+		panic("Index out of bounds")
+	}
+
+	for i := int64(0); i < position; i++ {
+		if current.nextValue == nil {
+			break
+		}
+
+		current = current.nextValue
+	}
+
+	return current.value
+}
+
+func (list List[T]) print() {
+	if list.head != nil {
+		value := list.head
+
+		fmt.Println(value.value)
+
+		for value.nextValue != nil {
+			fmt.Println(value.nextValue.value)
+			value = value.nextValue
+		}
+	}
+}
+
 func main() {
 	var list List[int]
 
@@ -89,7 +149,9 @@ func main() {
 
 	list.addInPosition(3, 1)
 
-	list.pop()
+	// list.removeInPosition(0)
 
-	list.print()
+	// value := list.search(3)
+	// fmt.Println(value)
+	// list.print()
 }
