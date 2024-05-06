@@ -16,7 +16,7 @@ Searching:
 - [x] Search for the nth element.
       
 Updating:
-- [ ] Update the value of a specific node.
+- [x] Update the value of a specific node.
       
 Size related:
 - [ ] Get the size (length) of the list.

@@ -128,6 +128,20 @@ func (list *List[T]) search(position int64) T {
 	return current.value
 }
 
+func (list *List[T]) update(value T, position int64) {
+	current := list.head
+
+	for i := int64(0); i < position; i++ {
+		if current.nextValue == nil {
+			panic("Index out of bounds")
+		}
+
+		current = current.nextValue
+	}
+
+	current.value = value
+}
+
 func (list List[T]) print() {
 	if list.head != nil {
 		value := list.head
@@ -149,9 +163,11 @@ func main() {
 
 	list.addInPosition(3, 1)
 
+	// list.update(5, 2)
+
 	// list.removeInPosition(0)
 
 	// value := list.search(3)
 	// fmt.Println(value)
-	// list.print()
+	list.print()
 }
